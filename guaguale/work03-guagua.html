@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>刮刮乐</title>
+</head>
+<body>
+    <canvas style="border: 1px solid black; background: url(img/rdj.jpg)" id="myImg"></canvas>
+    <div>
+        <h1>刮刮中大奖</h1>
+        <img src="img/rdj.jpg" alt="" style="display: none;">
+    </div>
+</body>
+<script>
+    //底层和蒙版
+    var canvas = document.getElementById('myImg');
+    var Img = document.getElementsByTagName('img')[0];
+    canvas.width = 400;
+    canvas.height = 350;
+    var context = canvas.getContext("2d");
+    context.fillStyle = '#999';
+    context.fillRect(0, 0, 400, 350);
+    context.fill();
+    //刮奖效果
+    canvas.onmousedown = function() {
+        canvas.onmousemove = function(m) {
+            var m = m || window.event;
+            context.globalCompositeOperation = 'destination-out';
+            context.beginPath();
+            context.arc(m.clientX, m.clientY, 20, 0, Math.PI*2, false);
+            context.fill();
+        }
+    }
+    canvas.onmouseup = function() {
+        canvas.onmousemove = '';
+        clear();
+    }
+    var clear = function(e){
+        var a = context.getImageData(0,0,canvas.width,canvas.height).data;
+        var j = 0;
+        for(var i=3;i<a.length;i+=4){
+            if(a[i] == 0)
+                j++;
+        }
+        if(j>canvas.width*canvas.height*0.85){
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            alert("恭喜中奖");
+        }
+    };
+</script>
+</html>
