@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            margin: 0 auto;
+            width: 415px;
+            height: 480px;
+            position:relative;
+            overflow: hidden;
+            border: 5px solid gainsboro;
+        }
+        img{
+            width: 415px;
+            height: 272px;
+            float: left;
+            z-index:-1;
+            position:absolute;
+            transition: all 0.6s;
+        }
+        .box:hover img{
+			transform: scale(1.4);
+		}
+        .hover{
+            position: absolute;
+            width: 415px;
+            height: 272px;
+            background: rgba(189, 188, 188, 0);
+            transition: all 0.5s ease-in-out;
+        }
+        .box:hover .grey div{
+            background: rgba(189, 188, 188, 0.5);
+        }
+        .can{
+            position: absolute;
+        }
+        .content{
+            width: 415px;
+            height: 208px;
+            position:absolute;
+            bottom:0;
+            background: white;
+            transition: all 0.6s;
+        }
+        .content:hover{
+			height: 350px;
+		}
+        .ppp{
+            display: none;
+            font-size: 20px;
+            padding-left: 20px;
+            transition: all 1s;
+            color: rgb(153, 151, 151);
+        }
+        .box:hover .ppp{
+            display: block;
+            transition: all 1s;
+        }
+        .p1{
+            font-size: 23px;
+            font-weight: bold;
+            padding-left: 20px;
+        }
+        .p2{
+            color: rgb(253, 142, 14);
+            font-weight: 500;
+            font-size: 20px;
+        }
+        .p3{ 
+            font-size: 15px;
+            color: rgb(153, 151, 151);
+            padding-left: 20px;
+            position:absolute;
+            bottom:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="grey">
+            <img src="img/zhanqiao.jpg" alt="">
+            <div class="hover"></div>
+        </div>
+        <div id="can">
+            <canvas id="canvas" width="400" ></canvas>
+        </div>
+
+        <div class="content">
+            <p class="p1">
+                青岛栈桥<br>
+                <span class="p2">国家AAAA级旅游景区</span>
+            </p>
+            <p class="ppp">
+                青岛栈桥是青岛海滨风景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。青岛栈桥位于游人如织的青岛中山路南端，
+                桥身从海岸探入如弯月般的青岛湾深处。桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。
+            </p>
+            <p class="p3">10分钟前&nbsp;&nbsp;&nbsp;123讨论</p>
+        </div>
+    </div>
+</body>
+<script>
+    //画圆
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(360,55,28,0,2*Math.PI);
+    ctx.fillStyle="rgb(253, 142, 14)";
+    ctx.closePath();
+    ctx.fill();
+    //写字
+    ctx.font = "bolder 14px 微软雅黑";
+    ctx.fillStyle="white";
+    ctx.textBaseline = "middle";//竖直对齐
+    ctx.textAlign = "center";//水平对齐　
+    ctx.fillText("15", 360, 50);
+    ctx.fillText("五月", 360, 65);
+</script>
+</html>
